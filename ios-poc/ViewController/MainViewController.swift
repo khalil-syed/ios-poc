@@ -10,7 +10,7 @@ class MainViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Demo Table"
-        tableView?.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
+        tableView?.register(CustomTableViewCell.self, forCellReuseIdentifier: "CustomTableViewCell")
     }
 }
 
@@ -28,8 +28,7 @@ extension MainViewController {
 extension MainViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
-        cell.textLabel!.text = "Cell at row \(indexPath.row)"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as! CustomTableViewCell
         return cell
     }
 }

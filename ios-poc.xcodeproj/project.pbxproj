@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7754AEAA243BE5B900C56B11 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754AEA9243BE5B900C56B11 /* CustomTableViewCell.swift */; };
 		77EA52E2243B642E0075467B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EA52E1243B642E0075467B /* AppDelegate.swift */; };
 		77EA52EB243B64300075467B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77EA52EA243B64300075467B /* Assets.xcassets */; };
 		77EA52EE243B64300075467B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77EA52EC243B64300075467B /* LaunchScreen.storyboard */; };
@@ -25,6 +26,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7754AEA9243BE5B900C56B11 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		77EA52DE243B642E0075467B /* iOS PoC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS PoC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77EA52E1243B642E0075467B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		77EA52EA243B64300075467B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -54,6 +56,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7754AEA8243BE56E00C56B11 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				7754AEA9243BE5B900C56B11 /* CustomTableViewCell.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		77EA52D5243B642E0075467B = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +85,7 @@
 		77EA52E0243B642E0075467B /* ios-poc */ = {
 			isa = PBXGroup;
 			children = (
+				7754AEA8243BE56E00C56B11 /* Components */,
 				77EA5303243B676C0075467B /* ViewController */,
 				77EA52E1243B642E0075467B /* AppDelegate.swift */,
 				77EA52EA243B64300075467B /* Assets.xcassets */,
@@ -201,6 +212,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7754AEAA243BE5B900C56B11 /* CustomTableViewCell.swift in Sources */,
 				77EA5305243B677A0075467B /* MainViewController.swift in Sources */,
 				77EA52E2243B642E0075467B /* AppDelegate.swift in Sources */,
 			);
