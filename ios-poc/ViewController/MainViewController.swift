@@ -29,6 +29,7 @@ extension MainViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as! CustomTableViewCell
+        cell.countryInfoItem = CountryInfoItem.mock()
         return cell
     }
 }

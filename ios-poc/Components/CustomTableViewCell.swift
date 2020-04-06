@@ -7,12 +7,21 @@ class CustomTableViewCell: UITableViewCell {
     
     // MARK: - SubViews
     
+    var countryInfoItem: CountryInfoItem? {
+        didSet {
+            guard let item = countryInfoItem else { return }
+            
+            if let title = item.title { lblTitle.text = title }
+            if let description = item.description { lblDescription.text = description }
+            if let image = item.imageHref { imgView.image = UIImage(named: image) }
+        }
+    }
+    
     private lazy var imgView: UIImageView = {
         let img = UIImageView()
         img.contentMode = .scaleAspectFill
         img.translatesAutoresizingMaskIntoConstraints = false
         img.clipsToBounds = true
-        img.image = UIImage(named: "canada")
         return img
     }()
     
@@ -22,7 +31,6 @@ class CustomTableViewCell: UITableViewCell {
         label.textColor = .darkText
         label.translatesAutoresizingMaskIntoConstraints = false
         label.adjustsFontForContentSizeCategory = true
-        label.text = "Transportation"
         label.textAlignment = .center
         return label
     }()
@@ -35,7 +43,6 @@ class CustomTableViewCell: UITableViewCell {
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
         label.adjustsFontForContentSizeCategory = true
-        label.text = "It is a well known fact that polar bears are the main mode of transportation in Canada. They consume far less gas and have the added benefit of being difficult to steal."
         return label
     }()
     
