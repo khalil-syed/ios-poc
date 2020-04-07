@@ -15,3 +15,13 @@ struct CountryInfo: Decodable {
         (rows ?? []).filter { $0.hasData() }
     }
 }
+
+// MARK: - Mock
+
+extension CountryInfo {
+    
+    static func mock() -> CountryInfo {
+        CountryInfo(title: "About Canada",
+                    rows: [CountryInfoItem.mock(), CountryInfoItem.mock()])
+    }
+}

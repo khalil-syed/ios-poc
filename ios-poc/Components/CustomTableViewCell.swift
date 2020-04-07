@@ -6,6 +6,8 @@ import Kingfisher
 
 class CustomTableViewCell: UITableViewCell {
     
+    var redrawCallback: (() -> Void)?
+    
     // MARK: - SubViews
     
     var countryInfoItem: CountryInfoItem? {
@@ -14,21 +16,11 @@ class CustomTableViewCell: UITableViewCell {
             
             if let title = item.title { lblTitle.text = title }
             if let description = item.description { lblDescription.text = description }
-            loadImage()
+            loadImage(url: item.imageHref, callback: redrawCallback)
         }
     }
     
-    var redrawCallback: (() -> Void)?
-    
-    private func loadImage() {
-        guard let item = countryInfoItem, let image = item.imageHref else { return }
-        
-        imgView.loadImage(fromUrl: image) { [weak self] in
-            self?.redrawCallback?()
-        }
-    }
-    
-    private lazy var imgView: UIImageView = {
+    lazy var imgView: UIImageView = {
         let img = UIImageView()
         img.contentMode = .scaleAspectFill
         img.translatesAutoresizingMaskIntoConstraints = false
@@ -36,7 +28,7 @@ class CustomTableViewCell: UITableViewCell {
         return img
     }()
     
-    private lazy var lblTitle: UILabel = {
+    lazy var lblTitle: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .headline)
         label.textColor = .darkText
@@ -46,7 +38,7 @@ class CustomTableViewCell: UITableViewCell {
         return label
     }()
 
-    private lazy var lblDescription: UILabel = {
+    lazy var lblDescription: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .body)
         label.numberOfLines = 0
@@ -69,6 +61,14 @@ class CustomTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Methods
+    
+    func loadImage(url: String?, callback: (() -> Void)?) {
+        guard let imageURL = url else { return }
+        
+        imgView.loadImage(fromUrl: imageURL) { callback?() }
+    }
+    
     // MARK: - Overridden Methods
     
     override func prepareForReuse() {
@@ -80,7 +80,7 @@ class CustomTableViewCell: UITableViewCell {
     
     // MARK: - Private methods
 
-    private func addSubviews() {
+    func addSubviews() {
         contentView.addSubview(imgView)
         contentView.addSubview(lblTitle)
         contentView.addSubview(lblDescription)
@@ -88,7 +88,7 @@ class CustomTableViewCell: UITableViewCell {
     
     // MARK: Constraints
     
-    private func setAutoLayoutConstraints() {
+    func setAutoLayoutConstraints() {
         
         let margins = contentView.layoutMarginsGuide
         var constraints = [

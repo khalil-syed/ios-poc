@@ -25,29 +25,43 @@ class MainViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView?.register(CustomTableViewCell.self, forCellReuseIdentifier: "CustomTableViewCell")
-        tableView?.allowsSelection = false
+        setupRefreshControl()
+        setupTableView()
         fetchData()
     }
-}
-
-// MARK: - API Calls
-
-extension MainViewController {
     
-    private func fetchData() {
+    func setupRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
+    }
+    
+    func setupTableView() {
+        tableView?.register(CustomTableViewCell.self, forCellReuseIdentifier: "CustomTableViewCell")
+        tableView?.allowsSelection = false
+    }
+    
+    // MARK: - Refresh / API Calls 
+    
+    @objc func refresh(sender: AnyObject) {
+        fetchData()
+    }
+
+    func fetchData(completion: (() -> Void)? = nil) {
         dataProvider?.fetchCountryInfo(completion: { [weak self] response, error in
             if let _ = error {
                 return
             }
             guard let response = response else { return }
             DispatchQueue.main.async {
+                self?.refreshControl?.endRefreshing()
                 self?.onSuccess(response: response)
+                completion?()
             }
         })
     }
-    
-    private func onSuccess(response: CountryInfo) {
+
+    func onSuccess(response: CountryInfo) {
         self.title = response.title ?? ""
         self.countryInfoItems = response.countryItems()
         tableView?.reloadData()
@@ -70,15 +84,16 @@ extension MainViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as! CustomTableViewCell
         
-        if let item = item(atIndexPath: indexPath) {
-            cell.countryInfoItem = item
-        }
-        
         weak var tv = tableView
         cell.redrawCallback = {
             tv?.beginUpdates()
             tv?.endUpdates()
         }
+        
+        if let item = item(atIndexPath: indexPath) {
+            cell.countryInfoItem = item
+        }
+        
         return cell
     }
     
