@@ -26,6 +26,7 @@ class MainViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView?.register(CustomTableViewCell.self, forCellReuseIdentifier: "CustomTableViewCell")
+        tableView?.allowsSelection = false
         fetchData()
     }
 }
@@ -68,8 +69,15 @@ extension MainViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as! CustomTableViewCell
+        
         if let item = item(atIndexPath: indexPath) {
             cell.countryInfoItem = item
+        }
+        
+        weak var tv = tableView
+        cell.redrawCallback = {
+            tv?.beginUpdates()
+            tv?.endUpdates()
         }
         return cell
     }

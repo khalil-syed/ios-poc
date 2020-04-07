@@ -2,6 +2,7 @@
 
 import Foundation
 import UIKit
+import Kingfisher
 
 class CustomTableViewCell: UITableViewCell {
     
@@ -13,8 +14,17 @@ class CustomTableViewCell: UITableViewCell {
             
             if let title = item.title { lblTitle.text = title }
             if let description = item.description { lblDescription.text = description }
-//            if let image = item.imageHref { imgView.image = UIImage(named: image) }
-            imgView.image = UIImage(named: "canada")
+            loadImage()
+        }
+    }
+    
+    var redrawCallback: (() -> Void)?
+    
+    private func loadImage() {
+        guard let item = countryInfoItem, let image = item.imageHref else { return }
+        
+        imgView.loadImage(fromUrl: image) { [weak self] in
+            self?.redrawCallback?()
         }
     }
     
@@ -106,5 +116,23 @@ class CustomTableViewCell: UITableViewCell {
             
             [label.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
              label.trailingAnchor.constraint(equalTo: guide.trailingAnchor)]
+    }
+}
+
+// MARK: -
+
+extension UIImageView {
+    
+    func loadImage(fromUrl url: String, completion: (() -> Void)? = nil) {
+        guard let url = URL(string: url) else { return }
+        kf.indicatorType = .activity
+        kf.setImage(with: url) { result in
+            switch result {
+            case .success( _):
+                completion?()
+            case .failure(let error):
+                print("Image load failed: \(error.localizedDescription)")
+            }
+        }
     }
 }
