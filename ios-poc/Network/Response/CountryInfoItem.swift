@@ -9,6 +9,12 @@ struct CountryInfoItem: Decodable {
     let title: String?
     let description: String?
     let imageHref: String?
+    
+    // MARK: - Methods
+    
+    func hasData() -> Bool {
+        title != nil || description != nil || imageHref != nil
+    }
 }
 
 // MARK: -

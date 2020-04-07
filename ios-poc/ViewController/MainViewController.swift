@@ -5,12 +5,51 @@ import UIKit
 
 class MainViewController: UITableViewController {
     
+    // MARK: - Properties
+    
+    private let dataProvider: DataProvider?
+    private var countryInfoItems: [CountryInfoItem] = []
+    
+    // MARK: - Initializer
+    
+    init(withDataProvider dataProvider: DataProvider = APIDataProvider()) {
+        self.dataProvider = dataProvider
+        super.init(style: .plain)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Life Cycle Method
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Demo Table"
         tableView?.register(CustomTableViewCell.self, forCellReuseIdentifier: "CustomTableViewCell")
+        fetchData()
+    }
+}
+
+// MARK: - API Calls
+
+extension MainViewController {
+    
+    private func fetchData() {
+        dataProvider?.fetchCountryInfo(completion: { [weak self] response, error in
+            if let _ = error {
+                return
+            }
+            guard let response = response else { return }
+            DispatchQueue.main.async {
+                self?.onSuccess(response: response)
+            }
+        })
+    }
+    
+    private func onSuccess(response: CountryInfo) {
+        self.title = response.title ?? ""
+        self.countryInfoItems = response.countryItems()
+        tableView?.reloadData()
     }
 }
 
@@ -19,7 +58,7 @@ class MainViewController: UITableViewController {
 extension MainViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        2
+        countryInfoItems.count
     }
 }
 
@@ -29,7 +68,18 @@ extension MainViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as! CustomTableViewCell
-        cell.countryInfoItem = CountryInfoItem.mock()
+        if let item = item(atIndexPath: indexPath) {
+            cell.countryInfoItem = item
+        }
         return cell
+    }
+    
+    private func item(atIndexPath indexPath: IndexPath) -> CountryInfoItem? {
+        
+        guard indexPath.row >= 0 && indexPath.row < countryInfoItems.count else {
+            return nil
+        }
+        
+        return countryInfoItems[indexPath.row]
     }
 }

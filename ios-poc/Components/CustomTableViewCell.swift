@@ -13,7 +13,8 @@ class CustomTableViewCell: UITableViewCell {
             
             if let title = item.title { lblTitle.text = title }
             if let description = item.description { lblDescription.text = description }
-            if let image = item.imageHref { imgView.image = UIImage(named: image) }
+//            if let image = item.imageHref { imgView.image = UIImage(named: image) }
+            imgView.image = UIImage(named: "canada")
         }
     }
     
@@ -56,6 +57,15 @@ class CustomTableViewCell: UITableViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Overridden Methods
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        lblTitle.text = ""
+        lblDescription.text = ""
+        imgView.image = nil
     }
     
     // MARK: - Private methods
