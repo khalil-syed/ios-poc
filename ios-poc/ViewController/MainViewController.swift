@@ -50,14 +50,14 @@ class MainViewController: UITableViewController {
 
     func fetchData(completion: (() -> Void)? = nil) {
         dataProvider?.fetchCountryInfo(completion: { [weak self] response, error in
-            if let error = error {
-                self?.onError(error)
-                completion?()
-                return
-            }
-            guard let response = response else { return }
             DispatchQueue.main.async {
                 self?.refreshControl?.endRefreshing()
+                if let error = error {
+                   self?.onError(error)
+                    completion?()
+                    return
+                }
+                guard let response = response else { return }
                 self?.onSuccess(response: response)
                 completion?()
             }
@@ -72,6 +72,7 @@ class MainViewController: UITableViewController {
     
     func onError(_ error: APIError) {
         /* We can add/modify a UI element here to display error */
+        self.title = error.localizedDescription
     }
 }
 
