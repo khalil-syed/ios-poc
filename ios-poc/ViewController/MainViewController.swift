@@ -7,6 +7,7 @@ class MainViewController: UITableViewController {
     
     // MARK: - Properties
     
+    let cellIdentifier = "CustomTableViewCell"
     private let dataProvider: DataProvider?
     private var countryInfoItems: [CountryInfoItem] = []
     
@@ -37,7 +38,7 @@ class MainViewController: UITableViewController {
     }
     
     func setupTableView() {
-        tableView?.register(CustomTableViewCell.self, forCellReuseIdentifier: "CustomTableViewCell")
+        tableView?.register(CustomTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView?.allowsSelection = false
     }
     
@@ -49,7 +50,9 @@ class MainViewController: UITableViewController {
 
     func fetchData(completion: (() -> Void)? = nil) {
         dataProvider?.fetchCountryInfo(completion: { [weak self] response, error in
-            if let _ = error {
+            if let error = error {
+                self?.onError(error)
+                completion?()
                 return
             }
             guard let response = response else { return }
@@ -65,6 +68,10 @@ class MainViewController: UITableViewController {
         self.title = response.title ?? ""
         self.countryInfoItems = response.countryItems()
         tableView?.reloadData()
+    }
+    
+    func onError(_ error: APIError) {
+        /* We can add/modify a UI element here to display error */
     }
 }
 
@@ -82,8 +89,10 @@ extension MainViewController {
 extension MainViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as! CustomTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! CustomTableViewCell
         
+        
+        // Redraw callback is set before setting item because it is needed there.
         weak var tv = tableView
         cell.redrawCallback = {
             tv?.beginUpdates()

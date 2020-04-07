@@ -5,7 +5,13 @@ import Foundation
 
 struct MockDataProvider: DataProvider {
     
+    var error: APIError?
+    
     func fetchCountryInfo(completion: @escaping ((CountryInfo?, APIError?) -> Void)) {
+        if let error = error {
+            completion(nil, error)
+            return
+        }
         completion(CountryInfo.mock(), nil)
     }
 }

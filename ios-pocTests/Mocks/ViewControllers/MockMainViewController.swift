@@ -44,6 +44,12 @@ class MockMainViewController: MainViewController {
         fetchingData = false
     }
     
+    override func onError(_ error: APIError) {
+        super.onError(error)
+        dataFetchErrorCalled = true
+        fetchingData = false
+    }
+    
     override func refresh(sender: AnyObject) {
         super.refresh(sender: sender)
         fetchingData = true
