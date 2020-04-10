@@ -64,9 +64,11 @@ class CustomTableViewCell: UITableViewCell {
     // MARK: - Methods
     
     func loadImage(url: String?, callback: (() -> Void)?) {
-        guard let imageURL = url else { return }
+        guard let imageURL = url, imgView.image == nil else { return }
         
-        imgView.loadImage(fromUrl: imageURL) { callback?() }
+        imgView.loadImage(fromUrl: imageURL) {
+            callback?()
+        }
     }
     
     // MARK: - Overridden Methods
@@ -91,6 +93,7 @@ class CustomTableViewCell: UITableViewCell {
     func setAutoLayoutConstraints() {
         
         let margins = contentView.layoutMarginsGuide
+        
         var constraints = [
             // Anchor image view to top of content view margins
             imgView.topAnchor.constraint(equalTo: margins.topAnchor, constant: 0),
@@ -128,8 +131,10 @@ extension UIImageView {
         kf.indicatorType = .activity
         kf.setImage(with: url) { result in
             switch result {
-            case .success( _):
-                completion?()
+            case .success(let successResult):
+                if successResult.cacheType != .memory {
+                    completion?()
+                }
             case .failure(let error):
                 print("Image load failed: \(error.localizedDescription)")
             }

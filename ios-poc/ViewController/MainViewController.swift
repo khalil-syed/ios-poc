@@ -90,18 +90,23 @@ extension MainViewController {
 extension MainViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! CustomTableViewCell
-        
-        
-        // Redraw callback is set before setting item because it is needed there.
-        weak var tv = tableView
-        cell.redrawCallback = {
-            tv?.beginUpdates()
-            tv?.endUpdates()
-        }
-        
-        if let item = item(atIndexPath: indexPath) {
-            cell.countryInfoItem = item
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        if let customCell = cell as? CustomTableViewCell {
+            
+            // Redraw callback is set before setting item because it is needed there.
+            weak var tv = tableView
+            customCell.redrawCallback = {
+                if (tv?.isDragging ?? true) || (tv?.isDecelerating ?? true) {
+                    return
+                }
+                tv?.reloadRows(at: [indexPath], with: .fade)
+//                tv?.beginUpdates()
+//                tv?.endUpdates()
+            }
+            
+            if let item = item(atIndexPath: indexPath) {
+                customCell.countryInfoItem = item
+            }
         }
         
         return cell
