@@ -21,6 +21,8 @@ class CountryInfoViewController: UITableViewController, PresenterToViewProtocol 
     private var countryInfoItems: [CountryInfoItem] = []
     var presenter: ViewToPresenterProtocol?
     
+    var errorLabel: UILabel?
+    
     // MARK: - Initializer
     
     init() {
@@ -37,7 +39,7 @@ class CountryInfoViewController: UITableViewController, PresenterToViewProtocol 
         super.viewDidLoad()
         setupRefreshControl()
         setupTableView()
-
+        setupErrorLabel()
         presenter?.updateView()
     }
     
@@ -52,14 +54,45 @@ class CountryInfoViewController: UITableViewController, PresenterToViewProtocol 
         tableView?.allowsSelection = false
     }
     
+    func setupErrorLabel() {
+        guard errorLabel == nil else { return }
+        
+        errorLabel = UILabel()
+        errorLabel?.textAlignment = .center
+        errorLabel?.translatesAutoresizingMaskIntoConstraints = false
+        errorLabel?.backgroundColor = .red
+        errorLabel?.textColor = .white
+    }
+    
+    func showErrorLabel(withText text: String) {
+        errorLabel?.text = text
+        view.addSubview(errorLabel!)
+        
+        let margins = view.safeAreaLayoutGuide
+        let constraints = [
+            
+            errorLabel!.topAnchor.constraint(equalTo: margins.topAnchor),
+            errorLabel!.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
+            errorLabel!.leadingAnchor.constraint(equalTo: margins.leadingAnchor)
+        ]
+        NSLayoutConstraint.activate(constraints)
+        view.bringSubviewToFront(errorLabel!)
+    }
+    
+    func hideErrorLabel() {
+        errorLabel?.removeFromSuperview()
+    }
+    
     // MARK: - Refresh / API Calls 
     
     @objc func refresh(sender: AnyObject) {
+        hideErrorLabel()
         presenter?.updateView()
     }
     
     func showCountryInfo(_ countryInfoModel: CountryInfoModel) {
         refreshControl?.endRefreshing()
+        hideErrorLabel()
         self.title = countryInfoModel.title ?? ""
         self.countryInfoItems = countryInfoModel.countryItems()
         tableView?.reloadData()
@@ -68,7 +101,7 @@ class CountryInfoViewController: UITableViewController, PresenterToViewProtocol 
     func showError(_ error: APIError) {
         refreshControl?.endRefreshing()
         /* We can add/modify a UI element here to display error */
-//        self.title = error.localizedDescription
+        showErrorLabel(withText: error.localizedDescription)
     }
 }
 
