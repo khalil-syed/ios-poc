@@ -8,11 +8,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        guard normalExecutionPath() else {
+            self.window = nil
+            return true
+        }
+        
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = UINavigationController(rootViewController: MainViewController())
+        window?.rootViewController = UINavigationController(rootViewController: CountryInfoRouter.createModule())
         window?.makeKeyAndVisible()
         return true
+    }
+    
+    private func normalExecutionPath() -> Bool {
+        return NSClassFromString("XCTestCase") == nil
     }
 
 }

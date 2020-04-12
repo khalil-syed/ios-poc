@@ -2,7 +2,7 @@
 
 import Foundation
 
-struct CountryInfo: Decodable {
+struct CountryInfoModel: Decodable {
     
     // MARK: - Properties
     
@@ -18,10 +18,10 @@ struct CountryInfo: Decodable {
 
 // MARK: - Mock
 
-extension CountryInfo {
+extension CountryInfoModel {
     
-    static func mock() -> CountryInfo {
-        CountryInfo(title: "About Canada",
+    static func mock() -> CountryInfoModel {
+        CountryInfoModel(title: "About Canada",
                     rows: [CountryInfoItem.mock(), CountryInfoItem.mock()])
     }
 }

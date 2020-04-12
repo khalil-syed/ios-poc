@@ -9,21 +9,26 @@
 /* Begin PBXBuildFile section */
 		22171AB65E29D5C377F229F4 /* Pods_ios_pocTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD0B0BD729DCC0D9F11B92C /* Pods_ios_pocTests.framework */; };
 		5845FA0C3C4B6E015E86C2D6 /* Pods_ios_poc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4120FDFC43BAD9DBCBC99542 /* Pods_ios_poc.framework */; };
+		772D7D832440781700B6D611 /* CountryInfoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D7D822440781700B6D611 /* CountryInfoRouter.swift */; };
+		772D7D862440790C00B6D611 /* CountryInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D7D852440790C00B6D611 /* CountryInfoPresenter.swift */; };
+		772D7D8B24407A1D00B6D611 /* CountryInfoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D7D8A24407A1D00B6D611 /* CountryInfoInteractor.swift */; };
 		7753D011243C6BEF000CF5E4 /* MockCustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7753D010243C6BEF000CF5E4 /* MockCustomTableViewCell.swift */; };
 		7753D013243C6CF7000CF5E4 /* CustomTableViewCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7753D012243C6CF7000CF5E4 /* CustomTableViewCellTests.swift */; };
 		7754AEAA243BE5B900C56B11 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754AEA9243BE5B900C56B11 /* CustomTableViewCell.swift */; };
 		7754AEAE243BE83100C56B11 /* CountryInfoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754AEAD243BE83100C56B11 /* CountryInfoItem.swift */; };
 		7754AEB2243BFEDE00C56B11 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754AEB1243BFEDE00C56B11 /* DataProvider.swift */; };
 		7754AEB4243C005A00C56B11 /* APIDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754AEB3243C005A00C56B11 /* APIDataProvider.swift */; };
-		7754AEB6243C008A00C56B11 /* CountryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754AEB5243C008A00C56B11 /* CountryInfo.swift */; };
+		7754AEB6243C008A00C56B11 /* CountryInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7754AEB5243C008A00C56B11 /* CountryInfoModel.swift */; };
+		77C079C02441BAE000AB4009 /* MockPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C079BF2441BAE000AB4009 /* MockPresenter.swift */; };
+		77C079C224430D1700AB4009 /* CountryInfoInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C079C124430D1700AB4009 /* CountryInfoInteractorTests.swift */; };
 		77E06B13243C14D500505CC6 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E06B12243C14D500505CC6 /* APIError.swift */; };
-		77E06B15243C590900505CC6 /* MainViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E06B14243C590900505CC6 /* MainViewControllerTests.swift */; };
+		77E06B15243C590900505CC6 /* CountryInfoViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E06B14243C590900505CC6 /* CountryInfoViewControllerTests.swift */; };
 		77E06B18243C59D100505CC6 /* MockDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E06B17243C59D100505CC6 /* MockDataProvider.swift */; };
-		77E06B1C243C616300505CC6 /* MockMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E06B1B243C616300505CC6 /* MockMainViewController.swift */; };
+		77E06B1C243C616300505CC6 /* MockCountryInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E06B1B243C616300505CC6 /* MockCountryInfoViewController.swift */; };
 		77EA52E2243B642E0075467B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EA52E1243B642E0075467B /* AppDelegate.swift */; };
 		77EA52EB243B64300075467B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77EA52EA243B64300075467B /* Assets.xcassets */; };
 		77EA52EE243B64300075467B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77EA52EC243B64300075467B /* LaunchScreen.storyboard */; };
-		77EA5305243B677A0075467B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EA5304243B677A0075467B /* MainViewController.swift */; };
+		77EA5305243B677A0075467B /* CountryInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EA5304243B677A0075467B /* CountryInfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,17 +45,22 @@
 		2CD0B0BD729DCC0D9F11B92C /* Pods_ios_pocTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios_pocTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4120FDFC43BAD9DBCBC99542 /* Pods_ios_poc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios_poc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EA6E8CEDD7D36C29F361232 /* Pods-ios-pocTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-pocTests.release.xcconfig"; path = "Target Support Files/Pods-ios-pocTests/Pods-ios-pocTests.release.xcconfig"; sourceTree = "<group>"; };
+		772D7D822440781700B6D611 /* CountryInfoRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryInfoRouter.swift; sourceTree = "<group>"; };
+		772D7D852440790C00B6D611 /* CountryInfoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryInfoPresenter.swift; sourceTree = "<group>"; };
+		772D7D8A24407A1D00B6D611 /* CountryInfoInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryInfoInteractor.swift; sourceTree = "<group>"; };
 		7753D010243C6BEF000CF5E4 /* MockCustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCustomTableViewCell.swift; sourceTree = "<group>"; };
 		7753D012243C6CF7000CF5E4 /* CustomTableViewCellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCellTests.swift; sourceTree = "<group>"; };
 		7754AEA9243BE5B900C56B11 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		7754AEAD243BE83100C56B11 /* CountryInfoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryInfoItem.swift; sourceTree = "<group>"; };
 		7754AEB1243BFEDE00C56B11 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		7754AEB3243C005A00C56B11 /* APIDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIDataProvider.swift; sourceTree = "<group>"; };
-		7754AEB5243C008A00C56B11 /* CountryInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryInfo.swift; sourceTree = "<group>"; };
+		7754AEB5243C008A00C56B11 /* CountryInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryInfoModel.swift; sourceTree = "<group>"; };
+		77C079BF2441BAE000AB4009 /* MockPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPresenter.swift; sourceTree = "<group>"; };
+		77C079C124430D1700AB4009 /* CountryInfoInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryInfoInteractorTests.swift; sourceTree = "<group>"; };
 		77E06B12243C14D500505CC6 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
-		77E06B14243C590900505CC6 /* MainViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerTests.swift; sourceTree = "<group>"; };
+		77E06B14243C590900505CC6 /* CountryInfoViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryInfoViewControllerTests.swift; sourceTree = "<group>"; };
 		77E06B17243C59D100505CC6 /* MockDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataProvider.swift; sourceTree = "<group>"; };
-		77E06B1B243C616300505CC6 /* MockMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMainViewController.swift; sourceTree = "<group>"; };
+		77E06B1B243C616300505CC6 /* MockCountryInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCountryInfoViewController.swift; sourceTree = "<group>"; };
 		77EA52DE243B642E0075467B /* iOS PoC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS PoC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77EA52E1243B642E0075467B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		77EA52EA243B64300075467B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -58,7 +68,7 @@
 		77EA52EF243B64300075467B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		77EA52F4243B64300075467B /* ios-pocTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ios-pocTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77EA52FA243B64300075467B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		77EA5304243B677A0075467B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		77EA5304243B677A0075467B /* CountryInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryInfoViewController.swift; sourceTree = "<group>"; };
 		8DE99063385130D2A5F3BA2B /* Pods-ios-pocTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-pocTests.debug.xcconfig"; path = "Target Support Files/Pods-ios-pocTests/Pods-ios-pocTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AD957439372F050836ACDB74 /* Pods-ios-poc.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-poc.release.xcconfig"; path = "Target Support Files/Pods-ios-poc/Pods-ios-poc.release.xcconfig"; sourceTree = "<group>"; };
 		F341E59A98CDE714436B3A62 /* Pods-ios-poc.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-poc.debug.xcconfig"; path = "Target Support Files/Pods-ios-poc/Pods-ios-poc.debug.xcconfig"; sourceTree = "<group>"; };
@@ -93,6 +103,30 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		772D7D812440780500B6D611 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				772D7D822440781700B6D611 /* CountryInfoRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		772D7D842440790100B6D611 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				772D7D852440790C00B6D611 /* CountryInfoPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		772D7D8924407A0D00B6D611 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				772D7D8A24407A1D00B6D611 /* CountryInfoInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
 		7753D00F243C6BDF000CF5E4 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -112,7 +146,6 @@
 		7754AEAB243BE80300C56B11 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				7754AEAC243BE81A00C56B11 /* Response */,
 				7754AEB1243BFEDE00C56B11 /* DataProvider.swift */,
 				7754AEB3243C005A00C56B11 /* APIDataProvider.swift */,
 				77E06B12243C14D500505CC6 /* APIError.swift */,
@@ -120,18 +153,27 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		7754AEAC243BE81A00C56B11 /* Response */ = {
+		77C079BA24407FA400AB4009 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
 				7754AEAD243BE83100C56B11 /* CountryInfoItem.swift */,
-				7754AEB5243C008A00C56B11 /* CountryInfo.swift */,
+				7754AEB5243C008A00C56B11 /* CountryInfoModel.swift */,
 			);
-			path = Response;
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		77C079BE2441BAC400AB4009 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				77C079BF2441BAE000AB4009 /* MockPresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		77E06B16243C59C700505CC6 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				77C079BE2441BAC400AB4009 /* Presenter */,
 				7753D00F243C6BDF000CF5E4 /* Components */,
 				77E06B1A243C615000505CC6 /* Network */,
 				77E06B19243C614A00505CC6 /* ViewControllers */,
@@ -142,7 +184,7 @@
 		77E06B19243C614A00505CC6 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				77E06B1B243C616300505CC6 /* MockMainViewController.swift */,
+				77E06B1B243C616300505CC6 /* MockCountryInfoViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -178,6 +220,10 @@
 		77EA52E0243B642E0075467B /* ios-poc */ = {
 			isa = PBXGroup;
 			children = (
+				77C079BA24407FA400AB4009 /* Entity */,
+				772D7D8924407A0D00B6D611 /* Interactor */,
+				772D7D842440790100B6D611 /* Presenter */,
+				772D7D812440780500B6D611 /* Router */,
 				7754AEAB243BE80300C56B11 /* Network */,
 				7754AEA8243BE56E00C56B11 /* Components */,
 				77EA5303243B676C0075467B /* ViewController */,
@@ -193,8 +239,9 @@
 			isa = PBXGroup;
 			children = (
 				77E06B16243C59C700505CC6 /* Mocks */,
+				77E06B14243C590900505CC6 /* CountryInfoViewControllerTests.swift */,
+				77C079C124430D1700AB4009 /* CountryInfoInteractorTests.swift */,
 				77EA52FA243B64300075467B /* Info.plist */,
-				77E06B14243C590900505CC6 /* MainViewControllerTests.swift */,
 				7753D012243C6CF7000CF5E4 /* CustomTableViewCellTests.swift */,
 			);
 			path = "ios-pocTests";
@@ -203,7 +250,7 @@
 		77EA5303243B676C0075467B /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				77EA5304243B677A0075467B /* MainViewController.swift */,
+				77EA5304243B677A0075467B /* CountryInfoViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -386,12 +433,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7754AEB6243C008A00C56B11 /* CountryInfo.swift in Sources */,
+				7754AEB6243C008A00C56B11 /* CountryInfoModel.swift in Sources */,
 				7754AEAA243BE5B900C56B11 /* CustomTableViewCell.swift in Sources */,
-				77EA5305243B677A0075467B /* MainViewController.swift in Sources */,
+				77EA5305243B677A0075467B /* CountryInfoViewController.swift in Sources */,
 				7754AEB2243BFEDE00C56B11 /* DataProvider.swift in Sources */,
 				77EA52E2243B642E0075467B /* AppDelegate.swift in Sources */,
+				772D7D8B24407A1D00B6D611 /* CountryInfoInteractor.swift in Sources */,
+				772D7D832440781700B6D611 /* CountryInfoRouter.swift in Sources */,
 				77E06B13243C14D500505CC6 /* APIError.swift in Sources */,
+				772D7D862440790C00B6D611 /* CountryInfoPresenter.swift in Sources */,
 				7754AEAE243BE83100C56B11 /* CountryInfoItem.swift in Sources */,
 				7754AEB4243C005A00C56B11 /* APIDataProvider.swift in Sources */,
 			);
@@ -403,9 +453,11 @@
 			files = (
 				7753D013243C6CF7000CF5E4 /* CustomTableViewCellTests.swift in Sources */,
 				7753D011243C6BEF000CF5E4 /* MockCustomTableViewCell.swift in Sources */,
+				77C079C02441BAE000AB4009 /* MockPresenter.swift in Sources */,
 				77E06B18243C59D100505CC6 /* MockDataProvider.swift in Sources */,
-				77E06B15243C590900505CC6 /* MainViewControllerTests.swift in Sources */,
-				77E06B1C243C616300505CC6 /* MockMainViewController.swift in Sources */,
+				77E06B15243C590900505CC6 /* CountryInfoViewControllerTests.swift in Sources */,
+				77C079C224430D1700AB4009 /* CountryInfoInteractorTests.swift in Sources */,
+				77E06B1C243C616300505CC6 /* MockCountryInfoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

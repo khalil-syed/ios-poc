@@ -7,11 +7,11 @@ struct MockDataProvider: DataProvider {
     
     var error: APIError?
     
-    func fetchCountryInfo(completion: @escaping ((CountryInfo?, APIError?) -> Void)) {
+    func fetchCountryInfo(completion: @escaping ((CountryInfoModel?, APIError?) -> Void)) {
         if let error = error {
             completion(nil, error)
             return
         }
-        completion(CountryInfo.mock(), nil)
+        completion(CountryInfoModel.mock(), nil)
     }
 }

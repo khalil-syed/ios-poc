@@ -3,18 +3,27 @@
 import Foundation
 import UIKit
 
-class MainViewController: UITableViewController {
+protocol PresenterToViewProtocol: class {
+    
+    // MARK: - Methods
+    
+    func showCountryInfo(_ countryInfoModel: CountryInfoModel)
+    func showError(_ error: APIError)
+}
+
+// MARK: -
+
+class CountryInfoViewController: UITableViewController, PresenterToViewProtocol {
     
     // MARK: - Properties
     
     let cellIdentifier = "CustomTableViewCell"
-    private let dataProvider: DataProvider?
     private var countryInfoItems: [CountryInfoItem] = []
+    var presenter: ViewToPresenterProtocol?
     
     // MARK: - Initializer
     
-    init(withDataProvider dataProvider: DataProvider = APIDataProvider()) {
-        self.dataProvider = dataProvider
+    init() {
         super.init(style: .plain)
     }
     
@@ -28,7 +37,8 @@ class MainViewController: UITableViewController {
         super.viewDidLoad()
         setupRefreshControl()
         setupTableView()
-        fetchData()
+
+        presenter?.updateView()
     }
     
     func setupRefreshControl() {
@@ -45,40 +55,26 @@ class MainViewController: UITableViewController {
     // MARK: - Refresh / API Calls 
     
     @objc func refresh(sender: AnyObject) {
-        fetchData()
+        presenter?.updateView()
     }
-
-    func fetchData(completion: (() -> Void)? = nil) {
-        dataProvider?.fetchCountryInfo(completion: { [weak self] response, error in
-            DispatchQueue.main.async {
-                self?.refreshControl?.endRefreshing()
-                if let error = error {
-                   self?.onError(error)
-                    completion?()
-                    return
-                }
-                guard let response = response else { return }
-                self?.onSuccess(response: response)
-                completion?()
-            }
-        })
-    }
-
-    func onSuccess(response: CountryInfo) {
-        self.title = response.title ?? ""
-        self.countryInfoItems = response.countryItems()
+    
+    func showCountryInfo(_ countryInfoModel: CountryInfoModel) {
+        refreshControl?.endRefreshing()
+        self.title = countryInfoModel.title ?? ""
+        self.countryInfoItems = countryInfoModel.countryItems()
         tableView?.reloadData()
     }
     
-    func onError(_ error: APIError) {
+    func showError(_ error: APIError) {
+        refreshControl?.endRefreshing()
         /* We can add/modify a UI element here to display error */
-        self.title = error.localizedDescription
+//        self.title = error.localizedDescription
     }
 }
 
 // MARK: - TableView DataSource
 
-extension MainViewController {
+extension CountryInfoViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         countryInfoItems.count
@@ -87,7 +83,7 @@ extension MainViewController {
 
 // MARK: - TableView Delegate
 
-extension MainViewController {
+extension CountryInfoViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
@@ -100,8 +96,6 @@ extension MainViewController {
                     return
                 }
                 tv?.reloadRows(at: [indexPath], with: .fade)
-//                tv?.beginUpdates()
-//                tv?.endUpdates()
             }
             
             if let item = item(atIndexPath: indexPath) {

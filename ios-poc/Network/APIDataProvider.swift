@@ -17,7 +17,7 @@ struct APIDataProvider: DataProvider {
     
     // MARK: - Methods
     
-    func fetchCountryInfo(completion: @escaping ((CountryInfo?, APIError?) -> Void)) {
+    func fetchCountryInfo(completion: @escaping ((CountryInfoModel?, APIError?) -> Void)) {
         guard let url = URL(string: "https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json") else {
             completion(nil, .invalidURL)
             return
@@ -39,7 +39,7 @@ struct APIDataProvider: DataProvider {
             
             do {
                 let decoder = JSONDecoder()
-                let countryInfo = try decoder.decode(CountryInfo.self, from: data)
+                let countryInfo = try decoder.decode(CountryInfoModel.self, from: data)
                 completion(countryInfo, nil)
                 
             } catch let parsingError {

@@ -5,5 +5,5 @@ import Combine
 
 protocol DataProvider {
     
-    func fetchCountryInfo(completion: @escaping ((CountryInfo?, APIError?) -> Void))
+    func fetchCountryInfo(completion: @escaping ((CountryInfoModel?, APIError?) -> Void))
 }
